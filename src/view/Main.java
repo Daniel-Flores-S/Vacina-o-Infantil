@@ -1,7 +1,6 @@
 package view;
 
 import model.User;
-
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
@@ -30,9 +29,9 @@ public class Main {
     private JTextField search;
     private JButton menuInit;
     private JTextField textField_1;
-    private JTextField name;
-    private JTextField textField_3;
-    private JTextField status;
+    private JTextField nameLB;
+    private JTextField idadeLB;
+    private JTextField cpfLB;
     private JTable tbLeft = new JTable();
 
     private ArrayList<User> dados= new ArrayList<User>();
@@ -74,7 +73,8 @@ public class Main {
             public void windowActivated(WindowEvent e) {
                 DefaultTableModel modelo = new DefaultTableModel();
 
-                modelo.addColumn("Nome");
+                modelo.addColumn("ID");
+                modelo.addColumn("NOME");
                 modelo.addColumn("CPF");
                 if (dados.isEmpty()) {
                     modelo.addRow(new String[]{
@@ -83,14 +83,15 @@ public class Main {
                 }
                 else {
                     for (int i = 0; i < dados.size(); i++)  {
-                        modelo.addRow(new String[]{
-                                dados.get(i).getName(), dados.get(i).getCpf()
+                        modelo.addRow(new Object[]{
+                                i,dados.get(i).getName(), dados.get(i).getCpf()
                         });
                     }
                 }
                 tbLeft.setModel(modelo);
             }
         });
+
 
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Meu Computador\\Pictures\\vacina (1).png"));
         frame.setExtendedState(6);
@@ -124,22 +125,22 @@ public class Main {
         btnNewButton_6.setFont(new Font("Tahoma", Font.BOLD, 11));
         btnNewButton_6.setForeground(Color.BLACK);
 
-        name = new JTextField();
-        name.setEditable(false);
-        name.setColumns(10);
+        nameLB = new JTextField();
+        nameLB.setEditable(false);
+        nameLB.setColumns(10);
 
-        textField_3 = new JTextField();
-        textField_3.setEditable(false);
-        textField_3.setColumns(10);
+        idadeLB = new JTextField();
+        idadeLB.setEditable(false);
+        idadeLB.setColumns(10);
 
-        JButton btnNewButton_6_1 = new JButton("Status");
-        btnNewButton_6_1.setMargin(new Insets(0, 0, 0, 0));
-        btnNewButton_6_1.setForeground(Color.BLACK);
-        btnNewButton_6_1.setFont(new Font("Tahoma", Font.BOLD, 11));
+        JButton lbl = new JButton("Status");
+        lbl.setMargin(new Insets(0, 0, 0, 0));
+        lbl.setForeground(Color.BLACK);
+        lbl.setFont(new Font("Tahoma", Font.BOLD, 11));
 
-        status = new JTextField();
-        status.setEditable(false);
-        status.setColumns(10);
+        cpfLB = new JTextField();
+        cpfLB.setEditable(false);
+        cpfLB.setColumns(10);
 
         JButton btnNewButton = new JButton("Limpar");
 
@@ -166,20 +167,18 @@ public class Main {
                                                                                 .addPreferredGap(ComponentPlacement.RELATED)
                                                                                 .addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)))
                                                                 .addPreferredGap(ComponentPlacement.UNRELATED)
-                                                                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                                                                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
                                                                         .addGroup(groupLayout.createSequentialGroup()
-                                                                                .addComponent(name, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
-                                                                                .addComponent(btnNewButton)
-                                                                                .addGap(21))
-                                                                        .addGroup(groupLayout.createSequentialGroup()
-                                                                                .addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(idadeLB, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
                                                                                 .addGap(18)
-                                                                                .addComponent(btnNewButton_6_1, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(lbl, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
                                                                                 .addGap(18)
-                                                                                .addComponent(status, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
-                                                                                .addContainerGap(240, Short.MAX_VALUE))))))
-                                        .addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                                                                .addComponent(cpfLB))
+                                                                        .addComponent(nameLB, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE))
+                                                                .addPreferredGap(ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                                                                .addComponent(btnNewButton)
+                                                                .addGap(21))))
+                                        .addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 924, Short.MAX_VALUE)))
         );
         groupLayout.setVerticalGroup(
                 groupLayout.createParallelGroup(Alignment.LEADING)
@@ -194,14 +193,14 @@ public class Main {
                                                         .addGroup(groupLayout.createSequentialGroup()
                                                                 .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
                                                                         .addComponent(btnNewButton_5)
-                                                                        .addComponent(name, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(nameLB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                                                         .addComponent(btnNewButton))
                                                                 .addPreferredGap(ComponentPlacement.UNRELATED)
                                                                 .addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
                                                                         .addComponent(btnNewButton_6)
-                                                                        .addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(btnNewButton_6_1, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(status, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+                                                                        .addComponent(idadeLB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(lbl, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(cpfLB, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
                                                         .addComponent(btnNewButton_2, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE))
                                                 .addPreferredGap(ComponentPlacement.RELATED)
                                                 .addComponent(panel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -569,7 +568,7 @@ public class Main {
         JButton updateBT = new JButton("Atualizar");
         updateBT.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                Update update = new Update();
+                Update update = new Update(dados);
                 update.setVisible(true);
             }
         });
@@ -631,11 +630,23 @@ public class Main {
         okBT.setForeground(Color.BLACK);
         okBT.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                //System.out.println(tbLeft.getValueAt(tbLeft.getSelectedRow(), tbLeft.getSelectedColumn()));
             }
         });
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
 
-        //tbLeft.setModel(org());
+            }
+        });tbLeft.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int i = (int)tbLeft.getValueAt(tbLeft.getSelectedRow(), 0);
+                nameLB.setText(dados.get(i).getName());
+                idadeLB.setText(String.valueOf(dados.get(i).getYearOfBirth()));
+                cpfLB.setText(dados.get(i).getCpf());
+            }
+        });
 
 
         tbLeft.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -667,3 +678,4 @@ public class Main {
         frame.getContentPane().setLayout(groupLayout);
     }
 }
+

@@ -25,7 +25,6 @@ public class Register extends JDialog {
         this.listaContatos = listaContatos;
     }
 
-    Main main = new Main();
     private final JPanel contentPanel = new JPanel();
     private JTextField nameTX;
     private JTextField endeTX;
@@ -142,11 +141,11 @@ public class Register extends JDialog {
                 public void actionPerformed(ActionEvent e) {
 
 
-                        User user = new User(nameTX.getText(), cpfTX.getText(), 1,
-                                endeTX.getText(), estadoTX.getText(), cidaTX.getText());
-                               listaContatos.add(user);
+                    User user = new User(nameTX.getText(), cpfTX.getText(), Integer.valueOf(nascTX.getText()),
+                            endeTX.getText(), estadoTX.getText(), cidaTX.getText());
+                    listaContatos.add(user);
 
-                                setVisible(false);
+                    setVisible(false);
                     /*if (validateData() == true){
                         int l = JOptionPane.showConfirmDialog(null, "Voltar a tela inicial", "Alerta",JOptionPane.YES_NO_OPTION);
                         switch (l){

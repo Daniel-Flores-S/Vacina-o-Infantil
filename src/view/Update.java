@@ -1,11 +1,12 @@
 package view;
 
+import model.User;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-
+import java.util.ArrayList;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -26,7 +27,18 @@ public class Update extends JDialog {
     private JTextField textField_5;
     private JTextField textField_6;
 
-    public Update() {
+    private ArrayList<User> listaContatos;
+
+    public ArrayList<User> getListaContatos() {
+        return listaContatos;
+    }
+
+    public void setListaContatos(ArrayList<User> listaContatos) {
+        this.listaContatos = listaContatos;
+    }
+
+    public Update(ArrayList<User> listaContatos ) {
+        setListaContatos(listaContatos);
         setSize(new Dimension(980, 635));
         setModal(true);
         setLocationRelativeTo(this);
