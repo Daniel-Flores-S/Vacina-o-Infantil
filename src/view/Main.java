@@ -1,5 +1,7 @@
 package view;
 
+import model.User;
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.GroupLayout;
@@ -8,35 +10,43 @@ import javax.swing.JButton;
 import java.awt.Color;
 import javax.swing.JPanel;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.Cursor;
-import java.awt.event.KeyEvent;
 import javax.swing.table.DefaultTableModel;
+
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
 public class Main {
-
     private JFrame frame;
     private JTextField search;
     private JButton menuInit;
-    private JTextField textField;
     private JTextField textField_1;
     private JTextField name;
     private JTextField textField_3;
     private JTextField status;
+    private JTable tbLeft = new JTable();
+
+    private ArrayList<User> dados= new ArrayList<User>();
+
+
 
     /**
      * Launch the application.
      */
+
+
+    public ArrayList<User> getDados() {
+        return dados;
+    }
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -55,16 +65,35 @@ public class Main {
      */
     public Main() {
         initialize();
-    }
 
-    /**
-     * Initialize the contents of the frame.
-     */
+    }
     private void initialize() {
         frame = new JFrame();
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowActivated(WindowEvent e) {
+                DefaultTableModel modelo = new DefaultTableModel();
+
+                modelo.addColumn("Nome");
+                modelo.addColumn("CPF");
+                if (dados.isEmpty()) {
+                    modelo.addRow(new String[]{
+                            "Sem informações", "Sem informações"
+                    });
+                }
+                else {
+                    for (int i = 0; i < dados.size(); i++)  {
+                        modelo.addRow(new String[]{
+                                dados.get(i).getName(), dados.get(i).getCpf()
+                        });
+                    }
+                }
+                tbLeft.setModel(modelo);
+            }
+        });
+
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Meu Computador\\Pictures\\vacina (1).png"));
         frame.setExtendedState(6);
-       //frame.setResizable(false);
         frame.setSize(950,620);
         frame.setLocationRelativeTo(null);		frame.getContentPane().setBackground(new Color(153, 153, 153));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -74,32 +103,7 @@ public class Main {
         panel.setBackground(new Color(0, 0, 255));
         JPanel panel_1 = new JPanel();
 
-        DefaultTableModel dados = new DefaultTableModel(
-                new Object[][] {
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                        {null, null, null, null, null, null},
-                },
-                new String[] {
-                        "Idade", "BCG", "Hepatite B", "Penta/DTP", "VIP/VOP", "Meningoc\u00F3cica"
-                }
-        ) {
-            Class[] columnTypes = new Class[] {
-                    Object.class, Object.class, Object.class, Object.class, Object.class, Object.class
-            };
-            public Class getColumnClass(int columnIndex) {
-                return columnTypes[columnIndex];
-            }
-            boolean[] columnEditables = new boolean[] {
-                    false, false, false, false, false, false
-            };
-            public boolean isCellEditable(int row, int column) {
-                return columnEditables[column];
-            }
-        };
+
 
         JButton btnNewButton_2 = new JButton("");
         btnNewButton_2.setBackground(Color.WHITE);
@@ -144,44 +148,47 @@ public class Main {
                 groupLayout.createParallelGroup(Alignment.LEADING)
                         .addGroup(groupLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
                                         .addGroup(groupLayout.createSequentialGroup()
-                                                .addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
-                                                .addContainerGap())
-                                        .addGroup(groupLayout.createSequentialGroup()
-                                                .addComponent(btnNewButton_2)
-                                                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-                                                        .addGroup(groupLayout.createSequentialGroup()
-                                                                .addGap(3)
-                                                                .addComponent(btnNewButton_5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                        .addGroup(groupLayout.createSequentialGroup()
-                                                                .addPreferredGap(ComponentPlacement.RELATED)
-                                                                .addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)))
-                                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                                .addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 221, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(ComponentPlacement.RELATED)
                                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
                                                         .addGroup(groupLayout.createSequentialGroup()
-                                                                .addComponent(name, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
-                                                                .addPreferredGap(ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
-                                                                .addComponent(btnNewButton)
-                                                                .addGap(21))
+                                                                .addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
+                                                                .addContainerGap())
                                                         .addGroup(groupLayout.createSequentialGroup()
-                                                                .addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18)
-                                                                .addComponent(btnNewButton_6_1, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(18)
-                                                                .addComponent(status, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
-                                                                .addContainerGap(4, Short.MAX_VALUE))))))
-                        .addComponent(panel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(btnNewButton_2)
+                                                                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+                                                                        .addGroup(groupLayout.createSequentialGroup()
+                                                                                .addGap(3)
+                                                                                .addComponent(btnNewButton_5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                                        .addGroup(groupLayout.createSequentialGroup()
+                                                                                .addPreferredGap(ComponentPlacement.RELATED)
+                                                                                .addComponent(btnNewButton_6, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)))
+                                                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                                                .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+                                                                        .addGroup(groupLayout.createSequentialGroup()
+                                                                                .addComponent(name, GroupLayout.PREFERRED_SIZE, 287, GroupLayout.PREFERRED_SIZE)
+                                                                                .addPreferredGap(ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                                                                                .addComponent(btnNewButton)
+                                                                                .addGap(21))
+                                                                        .addGroup(groupLayout.createSequentialGroup()
+                                                                                .addComponent(textField_3, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(18)
+                                                                                .addComponent(btnNewButton_6_1, GroupLayout.PREFERRED_SIZE, 55, GroupLayout.PREFERRED_SIZE)
+                                                                                .addGap(18)
+                                                                                .addComponent(status, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE)
+                                                                                .addContainerGap(240, Short.MAX_VALUE))))))
+                                        .addComponent(panel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         groupLayout.setVerticalGroup(
                 groupLayout.createParallelGroup(Alignment.LEADING)
                         .addGroup(groupLayout.createSequentialGroup()
+                                .addContainerGap()
                                 .addComponent(panel, GroupLayout.PREFERRED_SIZE, 52, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.UNRELATED)
+                                .addPreferredGap(ComponentPlacement.RELATED)
                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                                        .addComponent(panel_1, GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                                         .addGroup(groupLayout.createSequentialGroup()
                                                 .addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
                                                         .addGroup(groupLayout.createSequentialGroup()
@@ -491,7 +498,7 @@ public class Main {
         textField_1 = new JTextField();
         textField_1.setColumns(10);
 
-        textField = new JTextField();
+        new JTextField();
 
         JButton btnNewButton_3 = new JButton("Idade");
         btnNewButton_3.setForeground(Color.BLACK);
@@ -559,15 +566,11 @@ public class Main {
             }
         });
 
-        JButton vacBT = new JButton("Vacinar");
-        vacBT.setBorder(null);
-        vacBT.setBackground(new Color(0, 0, 255));
-        vacBT.setForeground(new Color(255, 255, 255));
-        vacBT.setFont(new Font("Clarendon BT", Font.PLAIN, 20));
-
         JButton updateBT = new JButton("Atualizar");
         updateBT.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                Update update = new Update();
+                update.setVisible(true);
             }
         });
         updateBT.setBorder(null);
@@ -576,6 +579,12 @@ public class Main {
         updateBT.setFont(new Font("Clarendon BT", Font.PLAIN, 20));
 
         JButton registerBT = new JButton("Cadastrar");
+        registerBT.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                Register register = new Register(dados);
+                register.setVisible(true);
+            }
+        });
         registerBT.setForeground(new Color(255, 255, 255));
         registerBT.setBackground(new Color(0, 0, 255));
         registerBT.setBorder(null);
@@ -589,13 +598,11 @@ public class Main {
                         .addGroup(gl_panel.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(menuInit, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18)
-                                .addComponent(vacBT, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18)
+                                .addPreferredGap(ComponentPlacement.RELATED)
                                 .addComponent(registerBT, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18)
+                                .addPreferredGap(ComponentPlacement.RELATED)
                                 .addComponent(updateBT, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED, 249, Short.MAX_VALUE)
+                                .addPreferredGap(ComponentPlacement.RELATED, 426, Short.MAX_VALUE)
                                 .addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
@@ -605,7 +612,6 @@ public class Main {
                                 .addContainerGap()
                                 .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
                                         .addComponent(menuInit, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                                        .addComponent(vacBT, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(registerBT, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(updateBT, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(24))
@@ -625,26 +631,15 @@ public class Main {
         okBT.setForeground(Color.BLACK);
         okBT.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+
             }
         });
 
-        JTable table_1 = new JTable();
-        table_1.setModel(new DefaultTableModel(
-                new Object[][] {
-                },
-                new String[] {
-                        "NOME", "CPF", "STATUS"
-                }
-        ) {
-            boolean[] columnEditables = new boolean[] {
-                    false, true, true
-            };
-            public boolean isCellEditable(int row, int column) {
-                return columnEditables[column];
-            }
-        });
-        table_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        table_1.setBorder(null);
+        //tbLeft.setModel(org());
+
+
+        tbLeft.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        tbLeft.setBorder(null);
         GroupLayout gl_panel_1 = new GroupLayout(panel_1);
         gl_panel_1.setHorizontalGroup(
                 gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -654,7 +649,7 @@ public class Main {
                                 .addGap(10)
                                 .addComponent(okBT, GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
                                 .addGap(5))
-                        .addComponent(table_1, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                        .addComponent(tbLeft, GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
         );
         gl_panel_1.setVerticalGroup(
                 gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -666,7 +661,7 @@ public class Main {
                                                 .addGap(1)
                                                 .addComponent(search, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(table_1, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
+                                .addComponent(tbLeft, GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE))
         );
         panel_1.setLayout(gl_panel_1);
         frame.getContentPane().setLayout(groupLayout);
