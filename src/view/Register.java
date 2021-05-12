@@ -15,69 +15,72 @@ import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class Register extends JDialog {
-    private ArrayList<User> listaContatos;
-
-    public ArrayList<User> getListaContatos() {
-        return listaContatos;
-    }
-
-    public void setListaContatos(ArrayList<User> listaContatos) {
-        this.listaContatos = listaContatos;
-    }
 
     private final JPanel contentPanel = new JPanel();
+    private ArrayList<User> dados;
     private JTextField nameTX;
-    private JTextField endeTX;
-    private JTextField estadoTX;
-    private JTextField nascTX;
+    private JTextField addressTX;
+    private JTextField stateTX;
+    private JTextField birthTX;
     private JTextField cpfTX;
-    private JTextField cidaTX;
+    private JTextField cityTX;
+
+    public ArrayList<User> getDados() {
+        return dados;
+    }
+
+    public void setDados(ArrayList<User> dados) {
+        this.dados = dados;
+    }
+
+    public Register(java.awt.Frame parent, boolean modal,ArrayList<User> dados) {
+        super(parent, modal);
+        initComponents();
+        setDados(dados);
+    }
+    public Register(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+    }
+
 
     public boolean validateData() {
-
         if (nameTX.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campo nome esta vazio");
             return false;
         }
-
         if (cpfTX.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campo nascimento esta vazio");
             return false;
         }
-
-        if (nascTX.getText().equals("")) {
+        if (birthTX.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campo cpf esta vazio");
             return false;
         }
-
-        if (endeTX.getText().equals("")) {
+        if (addressTX.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campo endereço esta vazio");
             return false;
         }
-
-        if (estadoTX.getText().equals("")) {
+        if (stateTX.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campo esta esta vazio");
             return false;
         }
-
-        if (cidaTX.getText().equals("")) {
+        if (cityTX.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Campo cidade esta vazio");
             return false;
-
         }
         return true;
-
     }
 
-
-    public Register(ArrayList<User> listaContatos ) {
-        setListaContatos(listaContatos);
+    private void initComponents() {
         setSize(new Dimension(980, 635));
         setModal(true);
         setLocationRelativeTo(this);
+        /*addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+            }
+        });*/
 
-
-        //setBounds(100, 100, 450, 300);
         getContentPane().setLayout(new BorderLayout());
         contentPanel.setLayout(new FlowLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -113,47 +116,43 @@ public class Register extends JDialog {
             contentPanel.add(panel_1);
             nameTX = new JTextField();
             nameTX.setColumns(10);
-            endeTX = new JTextField();
-            endeTX.setColumns(10);
+            addressTX = new JTextField();
+            addressTX.setColumns(10);
             JLabel lblNewLabel = new JLabel("Nome");
             lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
             JLabel lblNewLabel_2_2 = new JLabel("Endere\u00E7o");
             lblNewLabel_2_2.setFont(new Font("Tahoma", Font.BOLD, 14));
             JLabel lblNewLabel_3 = new JLabel("Estado");
             lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-            estadoTX = new JTextField();
-            estadoTX.setColumns(10);
+            stateTX = new JTextField();
+            stateTX.setColumns(10);
             JLabel lblNewLabel_2_1_1 = new JLabel("Ano de Nasc");
             lblNewLabel_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-            nascTX = new JTextField();
-            nascTX.setColumns(10);
+            birthTX = new JTextField();
+            birthTX.setColumns(10);
             JLabel lblNewLabel_2_1 = new JLabel("Cpf");
             lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 14));
             cpfTX = new JTextField();
             cpfTX.setColumns(10);
-            cidaTX = new JTextField();
-            cidaTX.setColumns(10);
+            cityTX = new JTextField();
+            cityTX.setColumns(10);
             JLabel lblNewLabel_4 = new JLabel("Cidade");
             lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 14));
             JButton salvaBT = new JButton("Salvar");
 
             salvaBT.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-
-
-                    User user = new User(nameTX.getText(), cpfTX.getText(), Integer.valueOf(nascTX.getText()),
-                            endeTX.getText(), estadoTX.getText(), cidaTX.getText());
-                    listaContatos.add(user);
-
-                    setVisible(false);
-                    /*if (validateData() == true){
+                    if (validateData() == true){
+                        User user = new User(nameTX.getText(), cpfTX.getText(), Integer.valueOf(birthTX.getText()),
+                            addressTX.getText(), stateTX.getText(), cityTX.getText());
+                        dados.add(user);
+                        form();
                         int l = JOptionPane.showConfirmDialog(null, "Voltar a tela inicial", "Alerta",JOptionPane.YES_NO_OPTION);
                         switch (l){
                             case 0:
-
+                                setVisible(false);
                         }
-
-                    }*/
+                    }
                 }
             });
 
@@ -175,7 +174,7 @@ public class Register extends JDialog {
                                                     .addComponent(nameTX, GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
                                                     .addContainerGap())
                                             .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addComponent(endeTX, GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
+                                                    .addComponent(addressTX, GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
                                                     .addContainerGap())
                                             .addGroup(gl_panel_1.createSequentialGroup()
                                                     .addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
@@ -187,12 +186,12 @@ public class Register extends JDialog {
                                                     .addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                                     .addGap(836))
                                             .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addComponent(estadoTX, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(stateTX, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
                                                     .addContainerGap(799, Short.MAX_VALUE))
                                             .addGroup(gl_panel_1.createSequentialGroup()
                                                     .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
                                                             .addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(nascTX, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
+                                                            .addComponent(birthTX, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
                                                     .addPreferredGap(ComponentPlacement.UNRELATED)
                                                     .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
                                                             .addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
@@ -201,7 +200,7 @@ public class Register extends JDialog {
                                             .addGroup(gl_panel_1.createSequentialGroup()
                                                     .addGap(173)
                                                     .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                                            .addComponent(cidaTX, GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
+                                                            .addComponent(cityTX, GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
                                                             .addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
                                                     .addContainerGap())
                                             .addGroup(gl_panel_1.createSequentialGroup()
@@ -229,19 +228,19 @@ public class Register extends JDialog {
                                                     .addComponent(cpfTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
                                             .addGroup(gl_panel_1.createSequentialGroup()
                                                     .addGap(34)
-                                                    .addComponent(nascTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
+                                                    .addComponent(birthTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
                                     .addPreferredGap(ComponentPlacement.RELATED)
                                     .addComponent(lblNewLabel_2_2, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(ComponentPlacement.RELATED)
-                                    .addComponent(endeTX, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(addressTX, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(ComponentPlacement.UNRELATED)
                                     .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
                                             .addComponent(lblNewLabel_3)
                                             .addComponent(lblNewLabel_4))
                                     .addPreferredGap(ComponentPlacement.UNRELATED)
                                     .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-                                            .addComponent(estadoTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cidaTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(stateTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cityTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
                                     .addGap(50)
                                     .addComponent(salvaBT, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
                                     .addGap(18)
@@ -251,5 +250,12 @@ public class Register extends JDialog {
             panel_1.setLayout(gl_panel_1);
         }
     }
-
+    private void form() {
+        nameTX.setText("");
+        birthTX.setText("");
+        cpfTX.setText("");
+        addressTX.setText("");
+        cityTX.setText("");
+        stateTX.setText("");
+    }
 }

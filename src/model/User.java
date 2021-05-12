@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -9,9 +10,16 @@ public class User {
     private String address;
     private String state;
     private String city;
-    private List<String> vac;
+    private ArrayList<Vaccines> vac;
 
-    public User() {
+    public User(String name, String cpf, int yearOfBirth, String address, String state, String city, ArrayList<Vaccines> vac) {
+        this.name = name;
+        this.cpf = cpf;
+        this.yearOfBirth = yearOfBirth;
+        this.address = address;
+        this.state = state;
+        this.city = city;
+        this.vac = vac;
     }
 
     public User(String name, String cpf, int yearOfBirth, String address, String state, String city) {
@@ -71,11 +79,11 @@ public class User {
         this.city = city;
     }
 
-    public List<String> getVac() {
+    public ArrayList<Vaccines> getVac() {
         return vac;
     }
 
-    public void setVac(List<String> vac) {
+    public void setVac(ArrayList<Vaccines> vac) {
         this.vac = vac;
     }
 }
