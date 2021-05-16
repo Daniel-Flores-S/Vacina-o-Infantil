@@ -1,18 +1,13 @@
 package view;
 
 import model.User;
+
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.*;
-import java.util.ArrayList;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
 
 public class Update extends JDialog {
     private final JPanel update = new JPanel();
@@ -35,9 +30,13 @@ public class Update extends JDialog {
         return dados;
     }
 
+    /**
+     * @wbp.parser.constructor
+     */
     public Update(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        form();
     }
 
     public Update(java.awt.Frame parent, boolean modal,ArrayList<User> listaContatos ) {
@@ -70,12 +69,8 @@ public class Update extends JDialog {
     private void initComponents() {
         setSize(new Dimension(980, 635));
         setModal(true);
-        setLocationRelativeTo(this);
-        /*addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
-        });*/
+
+        searchList.setBounds(129, 39, 693, 68);
 
         searchList.addMouseListener(new MouseAdapter() {
             @Override
@@ -103,44 +98,35 @@ public class Update extends JDialog {
 
         //setBounds(100, 100, 450, 300);
         getContentPane().setLayout(new BorderLayout());
-        update.setLayout(new FlowLayout());
         update.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(update, BorderLayout.CENTER);
+        update.setLayout(null);
 
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.BLUE);
-        update.add(panel);
+        JPanel header = new JPanel();
+        header.setBounds(5, 10, 954, 57);
+        header.setBackground(Color.BLUE);
+        update.add(header);
+        header.setLayout(null);
 
-        JLabel lblNewLabel_5 = new JLabel("Atualizar");
+        JLabel labelUP = new JLabel("Atualizar");
+        labelUP.setBounds(374, 11, 182, 40);
 
-        lblNewLabel_5.setForeground(Color.WHITE);
-        lblNewLabel_5.setFont(new Font("Clarendon BT", Font.PLAIN, 33));
-        GroupLayout gl_panel = new GroupLayout(panel);
-        gl_panel.setHorizontalGroup(
-                gl_panel.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-                                .addGap(374)
-                                .addComponent(lblNewLabel_5, GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
-                                .addGap(398))
-        );
-        gl_panel.setVerticalGroup(
-                gl_panel.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panel.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblNewLabel_5, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(6))
-        );
-        panel.setLayout(gl_panel);
+        labelUP.setForeground(Color.WHITE);
+        labelUP.setFont(new Font("Clarendon BT", Font.PLAIN, 33));
+        header.add(labelUP);
 
-        JPanel panel_1 = new JPanel();
-        panel_1.setBackground(Color.DARK_GRAY);
-        update.add(panel_1);
+        JPanel body = new JPanel();
+        body.setBounds(15, 72, 934, 510);
+        body.setBackground(Color.DARK_GRAY);
+        update.add(body);
 
-        JLabel lblNewLabel_3 = new JLabel("Estado");
-        lblNewLabel_3.setForeground(Color.WHITE);
-        lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 14));
+        JLabel labelState = new JLabel("Estado");
+        labelState.setBounds(10, 328, 88, 17);
+        labelState.setForeground(Color.WHITE);
+        labelState.setFont(new Font("Tahoma", Font.BOLD, 14));
 
         JButton salvarBT = new JButton("Salvar");
+        salvarBT.setBounds(10, 395, 894, 45);
 
         salvarBT.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -150,7 +136,6 @@ public class Update extends JDialog {
                     case 0:
                         setVisible(false);
                         break;
-
                 }
 
             }
@@ -160,180 +145,98 @@ public class Update extends JDialog {
         salvarBT.setBackground(new Color(30, 144, 255));
 
         state = new JTextField();
+        state.setBounds(10, 351, 129, 33);
         state.setColumns(10);
 
-        JLabel lblNewLabel_4 = new JLabel("Cidade");
-        lblNewLabel_4.setForeground(Color.WHITE);
-        lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 14));
+        JLabel labelCity = new JLabel("Cidade");
+        labelCity.setBounds(183, 328, 64, 17);
+        labelCity.setForeground(Color.WHITE);
+        labelCity.setFont(new Font("Tahoma", Font.BOLD, 14));
 
         city = new JTextField();
+        city.setBounds(183, 351, 721, 33);
         city.setColumns(10);
 
-        JLabel lblNewLabel_2_2 = new JLabel("Endere\u00E7o");
-        lblNewLabel_2_2.setForeground(Color.WHITE);
-        lblNewLabel_2_2.setFont(new Font("Tahoma", Font.BOLD, 14));
+        JLabel labelAddress = new JLabel("Endere\u00E7o");
+        labelAddress.setBounds(10, 241, 97, 17);
+        labelAddress.setForeground(Color.WHITE);
+        labelAddress.setFont(new Font("Tahoma", Font.BOLD, 14));
 
         address = new JTextField();
+        address.setBounds(10, 276, 894, 34);
         address.setColumns(10);
 
         year = new JTextField();
+        year.setBounds(10, 197, 136, 33);
         year.setColumns(10);
 
-        JLabel lblNewLabel_2_1_1 = new JLabel("Ano de Nasc");
-        lblNewLabel_2_1_1.setForeground(Color.WHITE);
-        lblNewLabel_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+        JLabel labelYear = new JLabel("Ano de Nasc");
+        labelYear.setBounds(14, 162, 163, 17);
+        labelYear.setForeground(Color.WHITE);
+        labelYear.setFont(new Font("Tahoma", Font.BOLD, 14));
 
-        JLabel lblNewLabel_2_1 = new JLabel("Cpf");
-        lblNewLabel_2_1.setForeground(Color.WHITE);
-        lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+        JLabel labelCpf = new JLabel("Cpf");
+        labelCpf.setBounds(183, 162, 58, 17);
+        labelCpf.setForeground(Color.WHITE);
+        labelCpf.setFont(new Font("Tahoma", Font.BOLD, 14));
 
         cpf = new JTextField();
+        cpf.setBounds(183, 197, 721, 33);
         cpf.setColumns(10);
 
-        JLabel lblNewLabel = new JLabel("Nome");
-        lblNewLabel.setForeground(Color.WHITE);
-        lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
+        JLabel labelName = new JLabel("Nome");
+        labelName.setBounds(10, 96, 138, 17);
+        labelName.setForeground(Color.WHITE);
+        labelName.setFont(new Font("Tahoma", Font.BOLD, 14));
 
         JPanel panel_2 = new JPanel();
+        panel_2.setBounds(10, 11, 924, 79);
         panel_2.setBackground(Color.WHITE);
 
         userTextField = new JTextField();
+        userTextField.setBounds(129, 11, 693, 22);
         userTextField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
                 listPessoas();
             }
         });
-
         userTextField.setColumns(10);
 
-        JLabel lblNewLabel_1 = new JLabel("Pesquisar Crian\u00E7a");
-        lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-
-        JList list = new JList();
-
-
+        JLabel labelPs = new JLabel("Pesquisar Crian\u00E7a");
+        labelPs.setBounds(10, 13, 115, 16);
+        labelPs.setFont(new Font("Tahoma", Font.BOLD, 13));
         searchList.setBorder(new LineBorder(Color.BLACK));
-        GroupLayout gl_panel_2 = new GroupLayout(panel_2);
-        gl_panel_2.setHorizontalGroup(
-                gl_panel_2.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panel_2.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(lblNewLabel_1)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(searchList, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(userTextField, GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE))
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
-                                .addGap(95))
-        );
-        gl_panel_2.setVerticalGroup(
-                gl_panel_2.createParallelGroup(Alignment.TRAILING)
-                        .addGroup(gl_panel_2.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(lblNewLabel_1)
-                                        .addComponent(userTextField, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(list, GroupLayout.PREFERRED_SIZE, 1, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(searchList, GroupLayout.PREFERRED_SIZE, 68, GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
-        );
-        panel_2.setLayout(gl_panel_2);
 
         name = new JTextField();
+        name.setBounds(10, 124, 895, 32);
         name.setColumns(10);
 
-        JButton btnNewButton_1_1 = new JButton("Cancelar");
-        btnNewButton_1_1.setForeground(Color.WHITE);
-        btnNewButton_1_1.setFont(new Font("Tahoma", Font.BOLD, 15));
-        btnNewButton_1_1.setBackground(new Color(30, 144, 255));
-        GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-        gl_panel_1.setHorizontalGroup(
-                gl_panel_1.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panel_1.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                        .addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE)
-                                        .addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-                                                .addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                .addGap(836))
-                                        .addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-                                                .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                                        .addComponent(salvarBT, GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE)
-                                                        .addGroup(gl_panel_1.createSequentialGroup()
-                                                                .addComponent(state, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-                                                                .addGap(44)
-                                                                .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                                                        .addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(city, GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE))))
-                                                .addGap(30))
-                                        .addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-                                                .addComponent(lblNewLabel_2_2, GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                                                .addGap(827))
-                                        .addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-                                                .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                                        .addComponent(address, GroupLayout.DEFAULT_SIZE, 894, Short.MAX_VALUE)
-                                                        .addGroup(gl_panel_1.createSequentialGroup()
-                                                                .addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-                                                                        .addGroup(gl_panel_1.createSequentialGroup()
-                                                                                .addComponent(year, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)
-                                                                                .addGap(37))
-                                                                        .addGroup(gl_panel_1.createSequentialGroup()
-                                                                                .addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
-                                                                                .addPreferredGap(ComponentPlacement.RELATED)))
-                                                                .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                                                        .addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                                                        .addComponent(cpf, GroupLayout.DEFAULT_SIZE, 721, Short.MAX_VALUE))))
-                                                .addGap(30))
-                                        .addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-                                                .addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                                                .addGap(786))
-                                        .addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-                                                .addComponent(name, GroupLayout.DEFAULT_SIZE, 895, Short.MAX_VALUE)
-                                                .addGap(29))
-                                        .addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-                                                .addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 894, GroupLayout.PREFERRED_SIZE)
-                                                .addContainerGap(30, Short.MAX_VALUE))))
-        );
-        gl_panel_1.setVerticalGroup(
-                gl_panel_1.createParallelGroup(Alignment.LEADING)
-                        .addGroup(gl_panel_1.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 79, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addComponent(name, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-                                .addGap(18)
-                                .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(year, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(cpf, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addComponent(lblNewLabel_2_2, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18)
-                                .addComponent(address, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18)
-                                .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(lblNewLabel_3)
-                                        .addComponent(lblNewLabel_4))
-                                .addPreferredGap(ComponentPlacement.RELATED)
-                                .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(state, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(city, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addComponent(salvarBT, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.UNRELATED)
-                                .addComponent(btnNewButton_1_1, GroupLayout.PREFERRED_SIZE, 45, GroupLayout.PREFERRED_SIZE)
-                                .addGap(14))
-        );
-        panel_1.setLayout(gl_panel_1);
+        JButton cancelBT = new JButton("Cancelar");
+        cancelBT.setBounds(10, 451, 894, 45);
+        cancelBT.setForeground(Color.WHITE);
+        cancelBT.setFont(new Font("Tahoma", Font.BOLD, 15));
+        cancelBT.setBackground(new Color(30, 144, 255));
+        body.setLayout(null);
+        panel_2.setLayout(null);
+        panel_2.add(labelPs);
+        panel_2.add(searchList);
+        panel_2.add(userTextField);
+        body.add(panel_2);
+        body.add(labelState);
+        body.add(salvarBT);
+        body.add(state);
+        body.add(labelCity);
+        body.add(city);
+        body.add(labelAddress);
+        body.add(address);
+        body.add(year);
+        body.add(labelYear);
+        body.add(labelCpf);
+        body.add(cpf);
+        body.add(labelName);
+        body.add(name);
+        body.add(cancelBT);
     }
 
     private void updateDados() {
@@ -345,7 +248,7 @@ public class Update extends JDialog {
         dados.get(aux03).setState(state.getText());
     }
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+    private void form() {
         name.setText("");
         year.setText("");
         cpf.setText("");

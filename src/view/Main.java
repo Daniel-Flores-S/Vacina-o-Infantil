@@ -1,33 +1,15 @@
 package view;
 
 import model.User;
-import model.Vaccines;
-
-import java.awt.EventQueue;
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
-import java.awt.Color;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.event.*;
-import java.awt.Font;
-import java.awt.Cursor;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Insets;
-import java.awt.Toolkit;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 
 public class Main {
-   Vaccines vac01 = new Vaccines(true, true, false, true, true);
-   Vaccines vac02 = new Vaccines(true, true, true, true, true);
-   Vaccines vac03 = new Vaccines(true, true, true, true, false);
-   Vaccines vac04 = new Vaccines(true, true, true, true, true);
-   Vaccines vac05 = new Vaccines(true, true, true, true, true);
-   Vaccines vac06 = new Vaccines(true, false, true, true, true);
-   Vaccines vac07 = new Vaccines(true, false, true, true, true);
-
-    ArrayList<Vaccines> vacc = new ArrayList<>();
-
-    User user = new User("Saulo Silva","076.652.668-45",2020,"Rua L", "Para", "City",vacc);
     private JTable vacinas;
     private JTable tbDados;
     private JTextField textField_1;
@@ -40,12 +22,13 @@ public class Main {
     private ArrayList<User> dados;
     private Register register;
     private Update update;
+    private Vacinar vacinar;
 
     public ArrayList<User> getDados() {
         return dados;
     }
 
-    private void menuItemRegister(java.awt.event.ActionEvent evt) {
+    private void menuItemRegister(ActionEvent evt) {
         if (register == null) {
             register = new Register(this.frame, true, dados);
         }
@@ -53,7 +36,7 @@ public class Main {
         register.setVisible(true);
     }
 
-    private void menuItemUpdate(java.awt.event.ActionEvent evt) {
+    private void menuItemUpdate(ActionEvent evt) {
         if (!dados.isEmpty()) {
             if (update == null) {
                 update = new Update(this.frame, true, dados);
@@ -65,16 +48,24 @@ public class Main {
             JOptionPane.showMessageDialog(this.frame, "Dados ainda não cadastrados!", "Atualizar Dados",
                     JOptionPane.WARNING_MESSAGE);
         }
-
     }
 
+    private void menuItemVacinar(ActionEvent evt) {
+        if (!dados.isEmpty()) {
+            if (vacinar == null) {
+                vacinar = new Vacinar(this.frame, true, dados);
+            }
+            vacinar.setLocationRelativeTo(this.frame);
+            vacinar.setVisible(true);
+        }
+
+    }
 
 
     private void initialize() {
         frame = new JFrame();
         dados= new ArrayList<>();
         tbDados = new JTable();
-        dados.add(user);
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowActivated(WindowEvent e) {
@@ -101,7 +92,7 @@ public class Main {
         });
 
         frame.setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\Meu Computador\\Pictures\\vacina (1).png"));
-        // frame.setExtendedState(6);
+        frame.setExtendedState(6);
         frame.setSize(950,620);
         frame.setLocationRelativeTo(null);
         frame.getContentPane().setBackground(new Color(153, 153, 153));
@@ -306,7 +297,7 @@ public class Main {
         panel_3.setLayout(gl_panel_3);
         panel_2.setLayout(gl_panel_2);
 
-        menuInit = new JButton("In\u00EDcio");
+        menuInit = new JButton("VACINAR");
         menuInit.setMnemonic(KeyEvent.VK_1);
         menuInit.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         menuInit.setBackground(new Color(0, 0, 255));
@@ -315,10 +306,12 @@ public class Main {
         menuInit.setFont(new Font("Clarendon BT", Font.PLAIN, 20));
         menuInit.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                menuItemVacinar(e);
+
             }
         });
 
-        JButton updateBT = new JButton("Atualizar");
+        JButton updateBT = new JButton("ATUALIZAR");
         updateBT.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 menuItemUpdate(e);
@@ -329,7 +322,7 @@ public class Main {
         updateBT.setForeground(new Color(255, 255, 255));
         updateBT.setFont(new Font("Clarendon BT", Font.PLAIN, 20));
 
-        JButton registerBT = new JButton("Cadastrar");
+        JButton registerBT = new JButton("CADASTRAR");
         registerBT.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 menuItemRegister(e);
@@ -348,12 +341,12 @@ public class Main {
                 gl_panel.createParallelGroup(Alignment.LEADING)
                         .addGroup(gl_panel.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(menuInit, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED)
                                 .addComponent(registerBT, GroupLayout.PREFERRED_SIZE, 157, GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(ComponentPlacement.RELATED)
+                                .addComponent(menuInit, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE)
+                                .addGap(18)
                                 .addComponent(updateBT, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(ComponentPlacement.RELATED, 426, Short.MAX_VALUE)
+                                .addPreferredGap(ComponentPlacement.RELATED, 416, Short.MAX_VALUE)
                                 .addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 84, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
@@ -362,9 +355,9 @@ public class Main {
                         .addGroup(gl_panel.createSequentialGroup()
                                 .addContainerGap()
                                 .addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-                                        .addComponent(menuInit, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                                        .addComponent(updateBT, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(registerBT, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(updateBT, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(menuInit, GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE))
                                 .addGap(24))
                         .addGroup(gl_panel.createSequentialGroup()
                                 .addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 53, Short.MAX_VALUE)
@@ -392,25 +385,24 @@ public class Main {
                 idadeLB.setText(String.valueOf(dados.get(i).getYearOfBirth()));
                 cpfLB.setText(dados.get(i).getCpf());
 
+
                 DefaultTableModel modelo02 = new DefaultTableModel();
-                modelo02.addColumn("BCG");
-                modelo02.addColumn("Hepatite B");
-                modelo02.addColumn("Penta/DTP");
-                modelo02.addColumn("VIP/VOP");
-                modelo02.addColumn("Meningocócica");
 
 
-                for (int x = 0; x < dados.get(i).getVac().size(); x++)  {
-                    modelo02.addRow(new Object[]{
-                            dados.get(i).getVac().get(x).isBCG(),
-                            dados.get(i).getVac().get(x).isHepatiteB(),
-                            dados.get(i).getVac().get(x).isPentaDTP(),
-                            dados.get(i).getVac().get(x).isVIPVOP(),
-                            dados.get(i).getVac().get(x).isMeningococica()
-
-
-                    });
-                }
+                modelo02 =new DefaultTableModel(
+                         dados.get(i).getVac()
+                        ,
+                        new String[] {
+                                "Idade", "BCG", "Hepatite B", "Penta/DTP", "VIP/VOP", "Meningoc\u00F3cica"
+                        }
+                ){
+                    boolean[] columnEditables = new boolean[] {
+                            false, true, true, true, true, true
+                    };
+                    public boolean isCellEditable(int row, int column) {
+                        return columnEditables[column];
+                    }
+                };
 
                 vacinas.setModel(modelo02);
             }
@@ -463,13 +455,8 @@ public class Main {
 
     public Main() {
         initialize();
-        vacc.add(vac01);
-        vacc.add(vac02);
-        vacc.add(vac03);
-        vacc.add(vac04);
-        vacc.add(vac05);
-        vacc.add(vac06);
-        vacc.add(vac07);
+
     }
+
 
 }

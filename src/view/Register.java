@@ -1,21 +1,15 @@
 package view;
 
 import model.User;
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
-import javax.swing.GroupLayout.Alignment;
-import java.awt.Font;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.Dimension;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Register extends JDialog {
-
     private final JPanel contentPanel = new JPanel();
     private ArrayList<User> dados;
     private JTextField nameTX;
@@ -33,6 +27,9 @@ public class Register extends JDialog {
         this.dados = dados;
     }
 
+    /**
+     * @wbp.parser.constructor
+     */
     public Register(java.awt.Frame parent, boolean modal,ArrayList<User> dados) {
         super(parent, modal);
         initComponents();
@@ -82,173 +79,117 @@ public class Register extends JDialog {
         });*/
 
         getContentPane().setLayout(new BorderLayout());
-        contentPanel.setLayout(new FlowLayout());
         contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         getContentPane().add(contentPanel, BorderLayout.CENTER);
+        contentPanel.setLayout(null);
         {
             JPanel panel = new JPanel();
+            panel.setBounds(0, 10, 964, 65);
             panel.setBackground(Color.BLUE);
             contentPanel.add(panel);
-            JLabel lblNewLabel_1 = new JLabel("Cadastrar");
-            lblNewLabel_1.setForeground(Color.WHITE);
-            lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 35));
-            GroupLayout gl_panel = new GroupLayout(panel);
-            gl_panel.setHorizontalGroup(
-                    gl_panel.createParallelGroup(Alignment.TRAILING)
-                            .addGap(0, 964, Short.MAX_VALUE)
-                            .addGroup(gl_panel.createSequentialGroup()
-                                    .addContainerGap(417, Short.MAX_VALUE)
-                                    .addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 171, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(376))
-            );
-            gl_panel.setVerticalGroup(
-                    gl_panel.createParallelGroup(Alignment.LEADING)
-                            .addGap(0, 65, Short.MAX_VALUE)
-                            .addGroup(gl_panel.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addContainerGap())
-            );
-            panel.setLayout(gl_panel);
+            panel.setLayout(null);
+            JLabel registerLB = new JLabel("Cadastrar");
+            registerLB.setBounds(417, 11, 171, 43);
+            registerLB.setForeground(Color.WHITE);
+            registerLB.setFont(new Font("Tahoma", Font.PLAIN, 35));
+            panel.add(registerLB);
         }
-        {
-            JPanel panel_1 = new JPanel();
-            contentPanel.add(panel_1);
-            nameTX = new JTextField();
-            nameTX.setColumns(10);
-            addressTX = new JTextField();
-            addressTX.setColumns(10);
-            JLabel lblNewLabel = new JLabel("Nome");
-            lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 14));
-            JLabel lblNewLabel_2_2 = new JLabel("Endere\u00E7o");
-            lblNewLabel_2_2.setFont(new Font("Tahoma", Font.BOLD, 14));
-            JLabel lblNewLabel_3 = new JLabel("Estado");
-            lblNewLabel_3.setFont(new Font("Tahoma", Font.BOLD, 14));
-            stateTX = new JTextField();
-            stateTX.setColumns(10);
-            JLabel lblNewLabel_2_1_1 = new JLabel("Ano de Nasc");
-            lblNewLabel_2_1_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-            birthTX = new JTextField();
-            birthTX.setColumns(10);
-            JLabel lblNewLabel_2_1 = new JLabel("Cpf");
-            lblNewLabel_2_1.setFont(new Font("Tahoma", Font.BOLD, 14));
-            cpfTX = new JTextField();
-            cpfTX.setColumns(10);
-            cityTX = new JTextField();
-            cityTX.setColumns(10);
-            JLabel lblNewLabel_4 = new JLabel("Cidade");
-            lblNewLabel_4.setFont(new Font("Tahoma", Font.BOLD, 14));
-            JButton salvaBT = new JButton("Salvar");
 
-            salvaBT.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    if (validateData() == true){
-                        User user = new User(nameTX.getText(), cpfTX.getText(), Integer.valueOf(birthTX.getText()),
-                            addressTX.getText(), stateTX.getText(), cityTX.getText());
-                        dados.add(user);
-                        form();
-                        int l = JOptionPane.showConfirmDialog(null, "Voltar a tela inicial", "Alerta",JOptionPane.YES_NO_OPTION);
-                        switch (l){
-                            case 0:
-                                setVisible(false);
-                        }
+        JPanel panel_1 = new JPanel();
+        panel_1.setBounds(10, 88, 938, 508);
+        contentPanel.add(panel_1);
+        panel_1.setLayout(null);
+
+        nameTX = new JTextField();
+        nameTX.setColumns(10);
+        nameTX.setBounds(10, 39, 918, 32);
+        panel_1.add(nameTX);
+
+        addressTX = new JTextField();
+        addressTX.setColumns(10);
+        addressTX.setBounds(10, 173, 918, 34);
+        panel_1.add(addressTX);
+
+        JLabel nameLB = new JLabel("Nome");
+        nameLB.setFont(new Font("Tahoma", Font.BOLD, 14));
+        nameLB.setAlignmentX(1.0f);
+        nameLB.setBounds(10, 11, 142, 17);
+        panel_1.add(nameLB);
+
+        JLabel addressLB = new JLabel("Endere\u00E7o");
+        addressLB.setFont(new Font("Tahoma", Font.BOLD, 14));
+        addressLB.setBounds(10, 150, 101, 17);
+        panel_1.add(addressLB);
+
+        JLabel stateLB = new JLabel("Estado");
+        stateLB.setFont(new Font("Tahoma", Font.BOLD, 14));
+        stateLB.setBounds(10, 218, 92, 17);
+        panel_1.add(stateLB);
+
+        stateTX = new JTextField();
+        stateTX.setColumns(10);
+        stateTX.setBounds(10, 246, 129, 33);
+        panel_1.add(stateTX);
+
+        JLabel nascLB = new JLabel("Ano de Nasc");
+        nascLB.setFont(new Font("Tahoma", Font.BOLD, 14));
+        nascLB.setBounds(10, 77, 163, 17);
+        panel_1.add(nascLB);
+
+        birthTX = new JTextField();
+        birthTX.setColumns(10);
+        birthTX.setBounds(10, 111, 136, 33);
+        panel_1.add(birthTX);
+
+        JLabel cpfLB = new JLabel("Cpf");
+        cpfLB.setFont(new Font("Tahoma", Font.BOLD, 14));
+        cpfLB.setBounds(183, 77, 58, 17);
+        panel_1.add(cpfLB);
+
+        cpfTX = new JTextField();
+        cpfTX.setColumns(10);
+        cpfTX.setBounds(183, 105, 745, 33);
+        panel_1.add(cpfTX);
+
+        cityTX = new JTextField();
+        cityTX.setColumns(10);
+        cityTX.setBounds(183, 246, 745, 33);
+        panel_1.add(cityTX);
+
+        JLabel cityLB = new JLabel("Cidade");
+        cityLB.setFont(new Font("Tahoma", Font.BOLD, 14));
+        cityLB.setBounds(183, 218, 64, 17);
+        panel_1.add(cityLB);
+
+        JButton salvaBT = new JButton("Salvar");
+        salvaBT.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                String[][] ls = new String[7][6];
+                if (validateData() == true){
+                    User user = new User(nameTX.getText(), cpfTX.getText(), Integer.valueOf(birthTX.getText()),
+                            addressTX.getText(), stateTX.getText(), cityTX.getText(), ls);
+                    dados.add(user);
+                    form();
+                    int l = JOptionPane.showConfirmDialog(null, "Voltar a tela inicial", "Alerta",JOptionPane.YES_NO_OPTION);
+                    switch (l){
+                        case 0:
+                            setVisible(false);
                     }
                 }
-            });
+            }
+        });
+        salvaBT.setForeground(Color.WHITE);
+        salvaBT.setFont(new Font("Tahoma", Font.BOLD, 15));
+        salvaBT.setBackground(new Color(30, 144, 255));
+        salvaBT.setBounds(10, 329, 918, 49);
+        panel_1.add(salvaBT);
 
-            salvaBT.setForeground(Color.WHITE);
-            salvaBT.setFont(new Font("Tahoma", Font.BOLD, 15));
-            salvaBT.setBackground(new Color(30, 144, 255));
-            JButton canceBT = new JButton("Cancelar");
-            canceBT.setForeground(Color.WHITE);
-            canceBT.setFont(new Font("Tahoma", Font.BOLD, 15));
-            canceBT.setBackground(new Color(30, 144, 255));
-            GroupLayout gl_panel_1 = new GroupLayout(panel_1);
-            gl_panel_1.setHorizontalGroup(
-                    gl_panel_1.createParallelGroup(Alignment.LEADING)
-                            .addGap(0, 938, Short.MAX_VALUE)
-                            .addGroup(gl_panel_1.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addComponent(nameTX, GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
-                                                    .addContainerGap())
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addComponent(addressTX, GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
-                                                    .addContainerGap())
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                                                    .addGap(786))
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addComponent(lblNewLabel_2_2, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-                                                    .addGap(827))
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                                                    .addGap(836))
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addComponent(stateTX, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE)
-                                                    .addContainerGap(799, Short.MAX_VALUE))
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                                            .addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 163, GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(birthTX, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
-                                                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                                                    .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                                            .addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(cpfTX, GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE))
-                                                    .addContainerGap())
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addGap(173)
-                                                    .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                                            .addComponent(cityTX, GroupLayout.DEFAULT_SIZE, 745, Short.MAX_VALUE)
-                                                            .addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
-                                                    .addContainerGap())
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addComponent(salvaBT, GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
-                                                    .addContainerGap())
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addComponent(canceBT, GroupLayout.DEFAULT_SIZE, 918, Short.MAX_VALUE)
-                                                    .addContainerGap())))
-            );
-            gl_panel_1.setVerticalGroup(
-                    gl_panel_1.createParallelGroup(Alignment.LEADING)
-                            .addGap(0, 508, Short.MAX_VALUE)
-                            .addGroup(gl_panel_1.createSequentialGroup()
-                                    .addGap(26)
-                                    .addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                                    .addComponent(nameTX, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(ComponentPlacement.RELATED)
-                                    .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-                                                            .addComponent(lblNewLabel_2_1_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-                                                            .addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
-                                                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                                                    .addComponent(cpfTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(gl_panel_1.createSequentialGroup()
-                                                    .addGap(34)
-                                                    .addComponent(birthTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)))
-                                    .addPreferredGap(ComponentPlacement.RELATED)
-                                    .addComponent(lblNewLabel_2_2, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(ComponentPlacement.RELATED)
-                                    .addComponent(addressTX, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                                    .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-                                            .addComponent(lblNewLabel_3)
-                                            .addComponent(lblNewLabel_4))
-                                    .addPreferredGap(ComponentPlacement.UNRELATED)
-                                    .addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-                                            .addComponent(stateTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cityTX, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE))
-                                    .addGap(50)
-                                    .addComponent(salvaBT, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18)
-                                    .addComponent(canceBT, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(44))
-            );
-            panel_1.setLayout(gl_panel_1);
-        }
+        JButton canceBT = new JButton("Cancelar");
+        canceBT.setForeground(Color.WHITE);
+        canceBT.setFont(new Font("Tahoma", Font.BOLD, 15));
+        canceBT.setBackground(new Color(30, 144, 255));
+        canceBT.setBounds(10, 396, 918, 49);
+        panel_1.add(canceBT);
     }
     private void form() {
         nameTX.setText("");

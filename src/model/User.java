@@ -10,9 +10,9 @@ public class User {
     private String address;
     private String state;
     private String city;
-    private ArrayList<Vaccines> vac;
+    private String[][] vac;
 
-    public User(String name, String cpf, int yearOfBirth, String address, String state, String city, ArrayList<Vaccines> vac) {
+    public User(String name, String cpf, int yearOfBirth, String address, String state, String city, String[][] vac) {
         this.name = name;
         this.cpf = cpf;
         this.yearOfBirth = yearOfBirth;
@@ -22,14 +22,7 @@ public class User {
         this.vac = vac;
     }
 
-    public User(String name, String cpf, int yearOfBirth, String address, String state, String city) {
-        this.name = name;
-        this.cpf = cpf;
-        this.yearOfBirth = yearOfBirth;
-        this.address = address;
-        this.state = state;
-        this.city = city;
-    }
+
 
     public String getName() {
         return name;
@@ -79,11 +72,11 @@ public class User {
         this.city = city;
     }
 
-    public ArrayList<Vaccines> getVac() {
+    public String[][] getVac() {
         return vac;
     }
 
-    public void setVac(ArrayList<Vaccines> vac) {
+    public void setVac(String[][] vac) {
         this.vac = vac;
     }
 }

@@ -1,15 +1,13 @@
 package model;
 
 public class Vaccines {
-    private boolean BCG;
-    private boolean HepatiteB;
-    private boolean PentaDTP;
-    private boolean VIPVOP;
-    private boolean Meningococica;
+    private String BCG;
+    private String HepatiteB;
+    private String PentaDTP;
+    private String VIPVOP;
+    private String Meningococica;
 
-
-
-    public Vaccines(boolean BCG, boolean hepatiteB, boolean pentaDTP, boolean VIPVOP, boolean meningococica) {
+    public Vaccines(String BCG, String hepatiteB, String pentaDTP, String VIPVOP, String meningococica) {
         this.BCG = BCG;
         HepatiteB = hepatiteB;
         PentaDTP = pentaDTP;
@@ -17,43 +15,43 @@ public class Vaccines {
         Meningococica = meningococica;
     }
 
-    public boolean isBCG() {
+    public String getBCG() {
         return BCG;
     }
 
-    public void setBCG(boolean BCG) {
+    public void setBCG(String BCG) {
         this.BCG = BCG;
     }
 
-    public boolean isHepatiteB() {
+    public String getHepatiteB() {
         return HepatiteB;
     }
 
-    public void setHepatiteB(boolean hepatiteB) {
+    public void setHepatiteB(String hepatiteB) {
         HepatiteB = hepatiteB;
     }
 
-    public boolean isPentaDTP() {
+    public String getPentaDTP() {
         return PentaDTP;
     }
 
-    public void setPentaDTP(boolean pentaDTP) {
+    public void setPentaDTP(String pentaDTP) {
         PentaDTP = pentaDTP;
     }
 
-    public boolean isVIPVOP() {
+    public String getVIPVOP() {
         return VIPVOP;
     }
 
-    public void setVIPVOP(boolean VIPVOP) {
+    public void setVIPVOP(String VIPVOP) {
         this.VIPVOP = VIPVOP;
     }
 
-    public boolean isMeningococica() {
+    public String getMeningococica() {
         return Meningococica;
     }
 
-    public void setMeningococica(boolean meningococica) {
+    public void setMeningococica(String meningococica) {
         Meningococica = meningococica;
     }
 }
